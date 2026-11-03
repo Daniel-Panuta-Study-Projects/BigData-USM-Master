@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/1.0.0/schema.json",
+  "name": "dashboardOT",
+  "displayName": "Dashboard OT",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "visualInteractions": [
+    {
+      "source": "slicerYear",
+      "target": "comboYear",
+      "type": "NoFilter"
+    }
+  ]
+}

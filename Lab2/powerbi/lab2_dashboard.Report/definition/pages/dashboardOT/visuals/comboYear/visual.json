@@ -1,0 +1,121 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "comboYear",
+  "position": {
+    "x": 410,
+    "y": 230,
+    "z": 5000,
+    "height": 480,
+    "width": 400,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "lineClusteredColumnComboChart",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "fiscal_year"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.fiscal_year",
+              "nativeQueryRef": "fiscal_year",
+              "displayName": "An fiscal"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "Angajați OT reali"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.Angajați OT reali",
+              "nativeQueryRef": "Angajați OT reali",
+              "displayName": "Angajați OT reali"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "Angajați OT așteptați (model)"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.Angajați OT așteptați (model)",
+              "nativeQueryRef": "Angajați OT așteptați (model)",
+              "displayName": "Angajați OT prezis"
+            }
+          ]
+        },
+        "Y2": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "Plată OT medie per angajat OT"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.Plată OT medie per angajat OT",
+              "nativeQueryRef": "Plată OT medie per angajat OT",
+              "displayName": "Plată OT medie / angajat"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Pe ani: câți fac OT (real vs. prezis) și cât costă fiecare'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

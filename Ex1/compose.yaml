@@ -1,0 +1,10 @@
+name: pyspark
+services:
+  jupyter:
+    image: quay.io/jupyter/pyspark-notebook:latest
+    container_name: pyspark-jupyter
+    ports:
+      - "8888:8888"
+      - "4040:4040"
+    volumes:
+      - ../:/home/jovyan/work

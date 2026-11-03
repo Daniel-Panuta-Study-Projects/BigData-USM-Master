@@ -1,0 +1,161 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "tableAgency",
+  "position": {
+    "x": 820,
+    "y": 230,
+    "z": 6000,
+    "height": 480,
+    "width": 440,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "agency_name"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.agency_name",
+              "nativeQueryRef": "agency_name",
+              "displayName": "Agenție"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "Plăți OT totale"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.Plăți OT totale",
+              "nativeQueryRef": "Plăți OT totale",
+              "displayName": "Plăți OT"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "Plată OT medie per angajat OT"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.Plată OT medie per angajat OT",
+              "nativeQueryRef": "Plată OT medie per angajat OT",
+              "displayName": "OT / angajat"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "Rată OT reală"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.Rată OT reală",
+              "nativeQueryRef": "Rată OT reală",
+              "displayName": "Real"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "Rată OT prezisă"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.Rată OT prezisă",
+              "nativeQueryRef": "Rată OT prezisă",
+              "displayName": "Prezis"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "gold_dashboard_agency_year"
+                    }
+                  },
+                  "Property": "Eroare predicție (pp)"
+                }
+              },
+              "queryRef": "gold_dashboard_agency_year.Eroare predicție (pp)",
+              "nativeQueryRef": "Eroare predicție (pp)",
+              "displayName": "Dif. pp"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "gold_dashboard_agency_year"
+                  }
+                },
+                "Property": "Plăți OT totale"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Agenții: cost și eroarea modelului (dif. = prezis − real)'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

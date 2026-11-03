@@ -1,0 +1,3 @@
+expression DatabricksHost = "dbc-2efdc576-8d89.cloud.databricks.com" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+
+expression DatabricksHttpPath = "/sql/1.0/warehouses/b385175c6b505a92" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]

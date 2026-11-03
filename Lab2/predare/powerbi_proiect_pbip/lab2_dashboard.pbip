@@ -1,0 +1,7 @@
+{
+  "version": "1.0",
+  "artifacts": [
+    { "report": { "path": "lab2_dashboard.Report" } }
+  ],
+  "settings": { "enableAutoRecovery": true }
+}

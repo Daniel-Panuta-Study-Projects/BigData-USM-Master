@@ -1,0 +1,128 @@
+table gold_dashboard_agency_year
+
+	measure 'Înregistrări' = SUM(gold_dashboard_agency_year[records])
+		formatString: #,0
+
+	measure 'Angajați OT reali' = SUM(gold_dashboard_agency_year[actual_ot_employees])
+		formatString: #,0
+
+	measure 'Angajați OT așteptați (model)' = SUM(gold_dashboard_agency_year[expected_ot_employees])
+		formatString: #,0
+
+	measure 'Rată OT reală' = DIVIDE([Angajați OT reali], [Înregistrări])
+		formatString: 0.0%;-0.0%;0.0%
+
+	measure 'Rată OT prezisă' = DIVIDE([Angajați OT așteptați (model)], [Înregistrări])
+		formatString: 0.0%;-0.0%;0.0%
+
+	measure 'Plăți OT totale' = SUM(gold_dashboard_agency_year[total_ot_paid])
+		formatString: \$#,0;(\$#,0);\$#,0
+
+	measure 'Plată OT medie per angajat OT' = DIVIDE([Plăți OT totale], [Angajați OT reali])
+		formatString: \$#,0;(\$#,0);\$#,0
+
+	measure 'Cost OT estimat (model)' = [Angajați OT așteptați (model)] * [Plată OT medie per angajat OT]
+		formatString: \$#,0;(\$#,0);\$#,0
+
+	measure 'Eroare predicție (pp)' = ([Rată OT prezisă] - [Rată OT reală]) * 100
+		formatString: +0.0;-0.0;0.0
+
+	measure 'Ultima actualizare' = MAX(gold_dashboard_agency_year[refreshed_at])
+		formatString: dd.mm.yyyy hh:nn
+
+	column fiscal_year
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: fiscal_year
+
+	column split
+		dataType: string
+		summarizeBy: none
+		sourceColumn: split
+
+	column agency_name
+		dataType: string
+		summarizeBy: none
+		sourceColumn: agency_name
+
+	column work_location_borough
+		dataType: string
+		summarizeBy: none
+		sourceColumn: work_location_borough
+
+	column pay_basis
+		dataType: string
+		summarizeBy: none
+		sourceColumn: pay_basis
+
+	column records
+		dataType: int64
+		formatString: #,0
+		summarizeBy: sum
+		sourceColumn: records
+
+	column actual_ot_employees
+		dataType: int64
+		formatString: #,0
+		summarizeBy: sum
+		sourceColumn: actual_ot_employees
+
+	column expected_ot_employees
+		dataType: double
+		formatString: #,0
+		summarizeBy: sum
+		sourceColumn: expected_ot_employees
+
+	column predicted_ot_employees
+		dataType: int64
+		formatString: #,0
+		summarizeBy: sum
+		sourceColumn: predicted_ot_employees
+
+	column actual_ot_rate
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: actual_ot_rate
+
+	column predicted_ot_rate
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		summarizeBy: none
+		sourceColumn: predicted_ot_rate
+
+	column total_ot_paid
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		summarizeBy: sum
+		sourceColumn: total_ot_paid
+
+	column total_ot_hours
+		dataType: double
+		formatString: #,0
+		summarizeBy: sum
+		sourceColumn: total_ot_hours
+
+	column avg_base_salary
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		summarizeBy: none
+		sourceColumn: avg_base_salary
+
+	column refreshed_at
+		dataType: dateTime
+		formatString: General Date
+		summarizeBy: none
+		sourceColumn: refreshed_at
+
+	partition gold_dashboard_agency_year = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs(DatabricksHost, DatabricksHttpPath, [Catalog = null, Database = null, EnableAutomaticProxyDiscovery = null]),
+				    workspace_Database = Source{[Name = "workspace", Kind = "Database"]}[Data],
+				    lab2_Schema = workspace_Database{[Name = "lab2", Kind = "Schema"]}[Data],
+				    Data = lab2_Schema{[Name = "gold_dashboard_agency_year", Kind = "Table"]}[Data]
+				in
+				    Data

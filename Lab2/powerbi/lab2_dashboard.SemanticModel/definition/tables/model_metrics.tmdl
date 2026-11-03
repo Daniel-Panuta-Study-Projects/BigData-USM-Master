@@ -1,0 +1,71 @@
+table model_metrics
+
+	measure 'ROC AUC (test 2025)' = MAX(model_metrics[roc_auc])
+		formatString: 0.000
+
+	measure 'F1 (test 2025)' = MAX(model_metrics[f1])
+		formatString: 0.000
+
+	column model_version
+		dataType: string
+		summarizeBy: none
+		sourceColumn: model_version
+
+	column test_year
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: test_year
+
+	column roc_auc
+		dataType: double
+		formatString: 0.000
+		summarizeBy: none
+		sourceColumn: roc_auc
+
+	column f1
+		dataType: double
+		formatString: 0.000
+		summarizeBy: none
+		sourceColumn: f1
+
+	column precision
+		dataType: double
+		formatString: 0.000
+		summarizeBy: none
+		sourceColumn: precision
+
+	column recall
+		dataType: double
+		formatString: 0.000
+		summarizeBy: none
+		sourceColumn: recall
+
+	column accuracy
+		dataType: double
+		formatString: 0.000
+		summarizeBy: none
+		sourceColumn: accuracy
+
+	column baseline_accuracy
+		dataType: double
+		formatString: 0.000
+		summarizeBy: none
+		sourceColumn: baseline_accuracy
+
+	column evaluated_at
+		dataType: dateTime
+		formatString: General Date
+		summarizeBy: none
+		sourceColumn: evaluated_at
+
+	partition model_metrics = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs(DatabricksHost, DatabricksHttpPath, [Catalog = null, Database = null, EnableAutomaticProxyDiscovery = null]),
+				    workspace_Database = Source{[Name = "workspace", Kind = "Database"]}[Data],
+				    lab2_Schema = workspace_Database{[Name = "lab2", Kind = "Schema"]}[Data],
+				    Data = lab2_Schema{[Name = "v_model_metrics_latest", Kind = "View"]}[Data]
+				in
+				    Data

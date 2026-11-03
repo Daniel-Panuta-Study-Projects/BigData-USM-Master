@@ -1,0 +1,33 @@
+# Secrete și chei
+.env
+*.env
+*-key.json
+usm-bigdata-*.json
+
+# Medii Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Date mari (se regenerează): Parquet brut descărcat de upload_nyc_data.py și data lake-ul din Lab1
+Lab1/nyc-data/*.parquet
+Lab1/data_lake/
+Lab1/checkpoints/
+spark-warehouse/
+metastore_db/
+derby.log
+
+# Power BI: cache local și setări de utilizator
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Arhive duplicate
+Lab2/Lab2_predare.zip
+
+# Sistem / editoare
+.DS_Store
+.idea/
+.vscode/
+~$*
